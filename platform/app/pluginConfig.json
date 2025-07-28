@@ -96,6 +96,10 @@
     {
       "packageName": "@ohif/mode-ultrasound-pleura-bline",
       "version": "3.0.0"
+    },
+    {
+      "packageName": "zip-mode",
+      "version": "y"
     }
   ],
   "public": [

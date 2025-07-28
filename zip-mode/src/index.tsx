@@ -21,6 +21,7 @@ const cornerstone = {
 const extensionDependencies = {
   '@ohif/extension-default': '^3.0.0',
   '@ohif/extension-cornerstone': '^3.0.0',
+  'zip-extension': '^0.0.1'
 };
 
 function modeFactory({ modeConfiguration }) {
@@ -142,7 +143,7 @@ function modeFactory({ modeConfiguration }) {
           return {
             id: ohif.layout,
             props: {
-              leftPanels: [ohif.leftPanel],
+              leftPanels: [ohif.leftPanel, 'zip-extension.panelModule.math'],
               rightPanels: [ohif.rightPanel],
               viewports: [
                 {

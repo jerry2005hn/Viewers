@@ -55,7 +55,7 @@ export default {
         name: 'zip',
         defaultComponent: () => <TestComponent servicesManager={servicesManager} />,
         tooltip: 'Export current image and metadata as zip',
-        icon: 'clipboard', // You can use a custom icon if you want
+        icon: 'clipboard',
       },
     ];
   },

@@ -1,5 +1,6 @@
 import { id } from './id';
 import TestComponent from './TestComponent';
+import React from 'react';
 
 /**
  * You can remove any of the following modules if you don't need them.
@@ -28,11 +29,11 @@ export default {
     return [
       {
         name: 'math',
-        iconName: 'logo-ohif-small',
+        iconName: 'clipboard',
         iconLabel: 'Math',
         label: 'Math',
-        component: TestComponent
-      }
+        component: props => <TestComponent {...props} servicesManager={servicesManager} />,
+      },
     ];
   },
   /**
@@ -48,7 +49,16 @@ export default {
    * {name, defaultComponent, clickHandler }. Examples include radioGroupIcons and
    * splitButton toolButton that the default extension is providing.
    */
-  getToolbarModule: ({ servicesManager, commandsManager, extensionManager }) => {},
+  getToolbarModule: ({ servicesManager, commandsManager, extensionManager }) => {
+    return [
+      {
+        name: 'zip',
+        defaultComponent: () => <TestComponent servicesManager={servicesManager} />,
+        tooltip: 'Export current image and metadata as zip',
+        icon: 'clipboard', // You can use a custom icon if you want
+      },
+    ];
+  },
   /**
    * LayoutTemplateMOdule should provide a list of layout templates that will be
    * available in OHIF for Modes to consume and use to layout the viewer.

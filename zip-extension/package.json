@@ -43,7 +43,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.20.13",
-    "math.js": "^1.1.46"
+    "math.js": "^1.1.46",
+    "jszip": "^3.10.1",
+    "file-saver": "^2.0.5"
   },
   "devDependencies": {
     "@babel/core": "7.28.0",

@@ -8,7 +8,7 @@ This OHIF extension provides functionality to export viewport images along with 
 
 - **Export Button**: I used the 'clipboard' icon from ohif ui icons since I could not find a 'download' icon
 - **Image Capture**: Captures the current viewport as a high-quality JPEG image
-- **Metadata Extraction**: Extracts PatientName and StudyDate from DICOM metadata
+- **Metadata Extraction**: Extracts PatientName, StudyDate, viewportId, and displaySetInstanceUID from DICOM metadata
 - **ZIP Creation**: Uses JSZip to create a client-side ZIP file containing:
   - `image.jpg` - The captured viewport image
   - `metadata.json` - JSON file with extracted metadata
@@ -77,10 +77,10 @@ The application will be available at `http://localhost:3000`
 2. Load a study
 3. In the mode selector, select "Zip Mode"
 4. Navigate to the image you want to export using the normal OHIF navigation tools
-5. Click the "Export ZIP" button in the toolbar (clipboard icon)
+5. Click the "Export as Zip" button in the toolbar (clipboard icon)
 6. The system will:
    - Capture the current viewport as a JPEG image
-   - Extract PatientName and StudyDate from the DICOM metadata
+   - Extract PatientName, StudyDate, viewportId, and displaySetInstanceUID from the DICOM metadata
    - Create a ZIP file containing both files
    - Automatically download the `report.zip` file
 

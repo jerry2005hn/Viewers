@@ -1,6 +1,12 @@
-import { hotkeys } from '@ohif/core';
-import { initToolGroups, toolbarButtons } from '@ohif/mode-longitudinal';
 import { id } from './id';
+import toolbarButtons from './toolbarButtons';
+
+// Type definition for the mode factory parameters
+type withAppTypes = {
+  servicesManager: any;
+  extensionManager: any;
+  commandsManager: any;
+};
 
 const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
@@ -21,7 +27,7 @@ const cornerstone = {
 const extensionDependencies = {
   '@ohif/extension-default': '^3.0.0',
   '@ohif/extension-cornerstone': '^3.0.0',
-  'zip-extension': '^0.0.1'
+  'zip-extension': '^0.0.1',
 };
 
 function modeFactory({ modeConfiguration }) {
@@ -41,76 +47,22 @@ function modeFactory({ modeConfiguration }) {
      * Runs when the Mode Route is mounted to the DOM. Usually used to initialize
      * Services and other resources.
      */
-    onModeEnter: ({ servicesManager, extensionManager, commandsManager }: withAppTypes) => {
-      const { measurementService, toolbarService, toolGroupService } = servicesManager.services;
+    onModeEnter: ({ servicesManager, extensionManager }: withAppTypes) => {
+      const { toolbarService } = servicesManager.services;
 
-      measurementService.clearMeasurements();
-
-      // Init Default and SR ToolGroups
-      initToolGroups(extensionManager, toolGroupService, commandsManager);
-
-      toolbarService.register([...toolbarButtons]);
+      toolbarService.register(toolbarButtons);
       toolbarService.updateSection('primary', [
         'MeasurementTools',
         'Zoom',
-        'Pan',
-        'TrackballRotate',
         'WindowLevel',
-        'Capture',
+        'Pan',
         'Layout',
-        'Crosshairs',
         'MoreTools',
-      ]);
-
-      toolbarService.updateSection('MeasurementTools', [
-        'Length',
-        'Bidirectional',
-        'ArrowAnnotate',
-        'EllipticalROI',
-        'RectangleROI',
-        'CircleROI',
-        'PlanarFreehandROI',
-        'SplineROI',
-        'LivewireContour',
-      ]);
-
-      toolbarService.updateSection('MoreTools', [
-        'Reset',
-        'rotate-right',
-        'flipHorizontal',
-        'ImageSliceSync',
-        'ReferenceLines',
-        'ImageOverlayViewer',
-        'StackScroll',
-        'invert',
-        'Probe',
-        'Cine',
-        'Angle',
-        'CobbAngle',
-        'Magnify',
-        'CalibrationLine',
-        'TagBrowser',
-        'AdvancedMagnify',
-        'UltrasoundDirectionalTool',
-        'WindowLevelRegion',
+        'Zip',
       ]);
     },
     onModeExit: ({ servicesManager }: withAppTypes) => {
-      const {
-        toolGroupService,
-        syncGroupService,
-        segmentationService,
-        cornerstoneViewportService,
-        uiDialogService,
-        uiModalService,
-      } = servicesManager.services;
-
-      uiDialogService.hideAll();
-      uiModalService.hide();
-      toolGroupService.destroy();
-      syncGroupService.destroy();
-      segmentationService.destroy();
-      cornerstoneViewportService.destroy();
+      // Clean up any resources if needed
     },
     /** */
     validationTags: {
@@ -143,7 +95,7 @@ function modeFactory({ modeConfiguration }) {
           return {
             id: ohif.layout,
             props: {
-              leftPanels: [ohif.leftPanel, 'zip-extension.panelModule.math'],
+              leftPanels: [ohif.leftPanel, 'zip-extension.panelModule.zip'],
               rightPanels: [ohif.rightPanel],
               viewports: [
                 {

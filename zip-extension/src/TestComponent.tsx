@@ -1,8 +1,10 @@
-import React from 'react';
-import JSZip from 'jszip';
 import fileSaver from 'file-saver';
+import { Button } from '@ohif/ui-next';
+import { useSystem } from '@ohif/core/src';
+import React from 'react';
 
-export default function TestComponent({ servicesManager }) {
+export default function TestComponent() {
+  const { servicesManager } = useSystem();
   const handleExport = async () => {
     if (!servicesManager) {
       alert('servicesManager is not available');
@@ -17,7 +19,7 @@ export default function TestComponent({ servicesManager }) {
     const activeViewport = viewports.get(activeViewportId);
     console.log('activeViewport:', activeViewport);
 
-    if (!activeViewport) {
+    if (!activeViewport || !activeViewportId) {
       alert('No active viewport');
       return;
     }
@@ -26,7 +28,7 @@ export default function TestComponent({ servicesManager }) {
     if (Array.isArray(activeViewport.displaySetInstanceUIDs)) {
       displaySetInstanceUID = activeViewport.displaySetInstanceUIDs[0];
     } else {
-      displaySetInstanceUID = activeViewport.displaySetInstanceUID;
+      displaySetInstanceUID = (activeViewport as any).displaySetInstanceUID;
     }
 
     if (!displaySetInstanceUID) {
@@ -65,8 +67,8 @@ export default function TestComponent({ servicesManager }) {
   };
 
   return (
-    <button
-      type="button"
+    <Button
+      variant="default"
       className="ohif-toolbar-button text-white"
       title="Export as Zip"
       onClick={handleExport}
@@ -82,6 +84,6 @@ export default function TestComponent({ servicesManager }) {
         />
       </svg>
       Export as Zip
-    </button>
+    </Button>
   );
 }

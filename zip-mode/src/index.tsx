@@ -95,7 +95,7 @@ function modeFactory({ modeConfiguration }) {
           return {
             id: ohif.layout,
             props: {
-              leftPanels: [ohif.leftPanel, 'zip-extension.panelModule.zip'],
+              leftPanels: [ohif.leftPanel],
               rightPanels: [ohif.rightPanel],
               viewports: [
                 {

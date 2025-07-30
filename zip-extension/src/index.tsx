@@ -26,17 +26,7 @@ export default {
    * iconName, iconLabel, label, component} object. Example of a panel module
    * is the StudyBrowserPanel that is provided by the default extension in OHIF.
    */
-  getPanelModule: ({ servicesManager, commandsManager, extensionManager }) => {
-    return [
-      {
-        name: 'zip',
-        iconName: 'clipboard',
-        iconLabel: 'zip',
-        label: 'zip',
-        component: props => <TestComponent {...props} servicesManager={servicesManager} />,
-      },
-    ];
-  },
+  getPanelModule: ({ servicesManager, commandsManager, extensionManager }) => {},
   /**
    * ViewportModule should provide a list of viewports that will be available in OHIF
    * for Modes to consume and use in the viewports. Each viewport is defined by

@@ -51,6 +51,8 @@ async function exportAsZip({ servicesManager }) {
     const metadata = {
       PatientName: PatientName || 'Unknown',
       StudyDate: StudyDate || 'Unknown',
+      activeViewportId: activeViewportId || 'Unknown',
+      displaySetInstanceUID: displaySetInstanceUID || 'Unknown',
     };
 
     // Create zip
